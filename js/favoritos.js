@@ -69,7 +69,7 @@ function getFavoritos() {
                         <p>${itemsFavs[i].type} </p>
                         <p>${itemsFavs[i].gender} </p>
                     </div>
-                    <button id="${itemsFavs[i].id}" onclick="borrarFav(${itemsFavs[i].id})" class="btn  d-flex justify-content-center align-items-center btn-danger btn-sm btn-fav"><span class="material-symbols-outlined">delete</span><p>BORRAR</p></button>
+                    <button id="${itemsFavs[i].id}" onclick="borrarFav(${itemsFavs[i].id})" class="btn  d-flex justify-content-center align-items-center btn-danger btn-sm"><span class="material-symbols-outlined">delete</span><p>BORRAR</p></button>
                 </div>
                 `
             }

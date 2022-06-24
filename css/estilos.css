@@ -21,6 +21,10 @@ nav{
     padding: 0 !important;
 }
 
+#capitulos p{
+    color: #fff !important;
+}
+
 p{
     margin: 0 !important;
 }
@@ -165,6 +169,7 @@ p{
 
 .btn-fav{
     background-color: #b3cb21 !important;
+    color: #fff !important;
 }
 
 .btn{

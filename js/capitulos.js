@@ -1,8 +1,17 @@
 // Elementos de DOM
 
+const buttonIndex = document.getElementById('sendButton');
+const inputElement = document.getElementById('search');
+const inputElementCapitulos = document.getElementById('searchCapitulos');
+const main = document.getElementById('main');
+var favoritos = document.getElementById('favoritos');
 var capitulos = document.getElementById('capitulos');
+const sendButtonCapitulos = document.getElementById('sendButtonCapitulos');
 
 
+window.onload = () => {
+    getCapitulos();
+}
 
 const fullQuery = () => `
 query{
@@ -20,6 +29,21 @@ query{
   }
 `
 
+const nameQuery = (name) => `
+    query {
+        episodes(filter: { name: "${name}" }) {
+            results{
+                id,
+                name,
+                air_date,
+                episode,
+                air_date,
+                created,      
+              }
+        }
+    }
+`
+
 function fecha (fecha) {
   const date = new Date(fecha);
   const year = date.getFullYear();
@@ -30,16 +54,31 @@ function fecha (fecha) {
   return day + '/' + month + '/' + year;
 }
 
-window.onload = () => {
+const getCapitulos= () => {
     
-    let options = {
-        method: 'post',
-        headers: {
-            "content-type": "application/json"
-        },
-        body: JSON.stringify({
-            query: fullQuery()
-        }),
+    const valorDeInput = inputElement.value;
+    console.log(valorDeInput);
+    let options;
+    if( valorDeInput === ''){
+        options = {
+            method: 'post',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                query: fullQuery()
+            }),
+        }
+    }else{
+        options = {
+            method: 'post',
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                query: nameQuery(valorDeInput)
+            }),
+        }
     }
    
     let salida = '<div class="container items">';
@@ -79,3 +118,8 @@ window.onload = () => {
         console.log('fallo',err);
     })
 }
+
+buttonIndex.addEventListener("click", () => {
+    console.log('fallo',buttonIndex);
+    getCapitulos();
+});

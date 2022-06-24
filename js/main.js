@@ -28,10 +28,7 @@ window.addEventListener('offline', event => {
     navbar.style.color = 'black';
     for (let i = 0; i < menuText.length; i++) {
         menuText[i].classList.add('sinConexion');
-        
     }
-    //menuText.classList.add('sinConexion');
-
 })
 
 
@@ -47,8 +44,6 @@ window.addEventListener('online', event => {
         menuText[i].classList.remove('sinConexion');
         
     }
-    //menuText.classList.remove('sinConexion');
-
 })
 
 if (!navigator.onLine){

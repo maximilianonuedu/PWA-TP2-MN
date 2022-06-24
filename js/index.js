@@ -7,13 +7,9 @@ var favoritos = document.getElementById('favoritos');
 var capitulos = document.getElementById('capitulos');
 const sendButtonCapitulos = document.getElementById('sendButtonCapitulos');
 
-function modalInstall (){
-    console.log('modalInstall');
-}
 
 window.onload = () => {
     getPersonajes();
-    modalInstall ();
 }
 
 const fullQuery = () => `
@@ -49,16 +45,8 @@ const nameQuery = (name) => `
     }
 `
 
-// function btnDisabled(id){
-//     let btn = document.getElementById(id);
-//     btn.setAttribute('disabled', 'disabled');
-// }
-
 function btnValidacion(id) {
-    // console.log('El id es: ' + id);
     let favoritos = localStorage.getItem('favoritos');
-    // let fvGUARDADOS_parse = JSON.parse(favoritos);
-    // console.log('Guardado en localStorage: ' + fvGUARDADOS_parse);
     if(favoritos != null) {
         let ValidarSiEsta = favoritos.indexOf(id);
         console.log("si da -1 no esta........",ValidarSiEsta);
@@ -70,18 +58,6 @@ function btnValidacion(id) {
             botonSacarFavorito.className = botonSacarFavorito.className.replace(" no-mostrar", "");
         }
     }
-    
-    // let botonFav = `borrarFav${id}`;
-    // let btnBorrar = document.querySelector('.'+botonFav);
-    // let botonBorrar = `agregarFav${id}`;
-    // let btnAgregar = document.querySelector('.'+botonBorrar);
-    // if(ValidarSiEsta != -1){
-    //     btnAgregar.setAttribute('disabled','true');
-    //     btnBorrar.setAttribute('disabled','false'); 
-    // }else{     
-    //     btnAgregar.setAttribute('disbled','false');
-    //     btnBorrar.setAttribute('disabled','true');
-    // }
 }
 
 
@@ -93,8 +69,6 @@ function agregarFav(id) {
         console.log("NO HAY LS recibi id y lo agregue",favoritos);
         localStorage.setItem('favoritos',JSON.stringify(favoritos));
         console.log("NO HABIA LS recibi id y lo guarde en LS",favoritos);
-        //btnDisabled(id);
-        // btnValidacion(id);
 
     }else{
        let favoritos = localStorage.getItem('favoritos');
@@ -112,12 +86,12 @@ function agregarFav(id) {
         }else{    
             console.log('YA SE ENCUENTRA EN FAVOTRITOS ESTE PERSONAJE');
         }
-        // btnValidacion(id);
     }
     let botonFavorito = document.querySelector('.agregarFav' + id);
     let botonSacarFavorito = document.querySelector('.borrarFav' + id);
 
-    
+    botonSacarFavorito.classList.add('btn-danger');
+    botonSacarFavorito.classList.remove('btn-fav');
     botonFavorito.className += " no-mostrar";
     botonSacarFavorito.className = botonSacarFavorito.className.replace(" no-mostrar", "");
 }
@@ -138,13 +112,15 @@ function borrarFav(id){
         }
     }
     let botonFavorito = document.querySelector('.agregarFav' + id);
+    
     let botonSacarFavorito = document.querySelector('.borrarFav' + id);
+    botonSacarFavorito.classList.add('btn-fav');
+    botonSacarFavorito.classList.remove('btn-danger');
+
 
     
     botonSacarFavorito.className += " no-mostrar";
-    botonFavorito.className = botonSacarFavorito.className.replace(" no-mostrar", "");
-    // btnValidacion(id);
-    // getPersonajes();
+    botonFavorito.classList.remove('no-mostrar');
 }
 
 const getPersonajes = () => {
@@ -200,7 +176,7 @@ const getPersonajes = () => {
                      <p>${array[i].gender} </p>
                      </div>
                      <button data-id="${array[i].id}" onclick="agregarFav(${array[i].id});" class="btn justify-content-center align-items-center btn-secondary agregarFav${array[i].id} btn-fav"><span class="material-symbols-outlined">star</span><p>AGREGAR</p></button>
-                     <button data-id="${array[i].id}" onclick="borrarFav(${array[i].id})" class="btn justify-content-center align-items-center btn-danger btn-sm borrarFav${array[i].id} no-mostrar"><span class="material-symbols-outlined">delete</span></button>
+                     <button data-id="${array[i].id}" onclick="borrarFav(${array[i].id})" class="btn justify-content-center align-items-center btn-danger btn-sm borrarFav${array[i].id} no-mostrar"><span class="material-symbols-outlined">delete</span><p>ELIMINAR</p></button>
                  </div>
                  `
                  
